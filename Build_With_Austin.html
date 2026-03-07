@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Austin Low | Automation Developer</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family: "Segoe UI", Arial, sans-serif;
+}
+
+body{
+background:#0b0f1a;
+color:white;
+overflow-x:hidden;
+line-height:1.6;
+}
+
+body::before{
+content:"";
+position:fixed;
+width:100%;
+height:100%;
+background-image:
+linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+background-size:40px 40px;
+z-index:-1;
+}
+
+.container{
+width:90%;
+max-width:1200px;
+margin:auto;
+}
+
+/* NAV */
+
+nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:25px 0;
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:10px;
+font-size:20px;
+font-weight:600;
+}
+
+.logo img{
+width:36px;
+}
+
+.contact-btn{
+background:linear-gradient(90deg,#00c6ff,#0072ff);
+padding:10px 22px;
+border-radius:30px;
+text-decoration:none;
+color:white;
+font-size:14px;
+}
+
+/* HERO */
+
+.hero{
+padding:120px 0;
+text-align:center;
+}
+
+.hero-logo{
+width:140px;
+margin-bottom:30px;
+}
+
+.hero h1{
+font-size:60px;
+margin-bottom:15px;
+}
+
+.hero h2{
+font-size:28px;
+color:#00c6ff;
+margin-bottom:50px;
+min-height:34px;
+}
+
+/* SERVICES */
+
+.services{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:25px;
+}
+
+.card{
+background:rgba(255,255,255,0.04);
+border:1px solid rgba(255,255,255,.08);
+backdrop-filter:blur(10px);
+padding:35px;
+border-radius:16px;
+transition:.35s;
+cursor:pointer;
+position:relative;
+}
+
+.card:hover{
+transform:translateY(-10px);
+border-color:#00c6ff;
+box-shadow:0 10px 30px rgba(0,198,255,.2);
+}
+
+.card h3{
+margin-top:10px;
+font-size:20px;
+}
+
+.card p{
+margin-top:10px;
+color:#94a3b8;
+font-size:14px;
+}
+
+.card .view-badge{
+display:inline-block;
+margin-top:14px;
+font-size:12px;
+color:#00c6ff;
+border:1px solid rgba(0,198,255,.35);
+border-radius:20px;
+padding:3px 12px;
+opacity:0;
+transition:.3s;
+}
+
+.card:hover .view-badge{
+opacity:1;
+}
+
+/* ===== MODAL ===== */
+
+.modal-overlay{
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.75);
+backdrop-filter:blur(6px);
+z-index:1000;
+align-items:center;
+justify-content:center;
+padding:20px;
+}
+
+.modal-overlay.active{
+display:flex;
+animation:fadeIn .25s ease;
+}
+
+@keyframes fadeIn{
+from{opacity:0}
+to{opacity:1}
+}
+
+.modal{
+background:#0f1628;
+border:1px solid rgba(255,255,255,.1);
+border-radius:20px;
+width:100%;
+max-width:900px;
+max-height:90vh;
+overflow:hidden;
+display:flex;
+flex-direction:column;
+animation:slideUp .3s ease;
+}
+
+@keyframes slideUp{
+from{transform:translateY(40px);opacity:0}
+to{transform:translateY(0);opacity:1}
+}
+
+.modal-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 28px;
+border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.modal-header h3{
+font-size:20px;
+}
+
+.modal-close{
+background:rgba(255,255,255,.08);
+border:none;
+color:white;
+width:34px;
+height:34px;
+border-radius:50%;
+font-size:18px;
+cursor:pointer;
+display:flex;
+align-items:center;
+justify-content:center;
+transition:.2s;
+}
+
+.modal-close:hover{
+background:rgba(255,255,255,.18);
+}
+
+.modal-body{
+overflow-y:auto;
+padding:28px;
+flex:1;
+}
+
+/* portfolio tabs inside modal */
+
+.tab-row{
+display:flex;
+gap:10px;
+margin-bottom:24px;
+flex-wrap:wrap;
+}
+
+.tab-btn{
+background:rgba(255,255,255,.06);
+border:1px solid rgba(255,255,255,.1);
+color:#94a3b8;
+padding:8px 18px;
+border-radius:20px;
+cursor:pointer;
+font-size:13px;
+transition:.25s;
+}
+
+.tab-btn.active{
+background:linear-gradient(90deg,#00c6ff,#0072ff);
+color:white;
+border-color:transparent;
+}
+
+.tab-content{
+display:none;
+}
+
+.tab-content.active{
+display:block;
+animation:fadeIn .2s ease;
+}
+
+/* project card inside modal */
+
+.project-card{
+background:rgba(255,255,255,.03);
+border:1px solid rgba(255,255,255,.07);
+border-radius:14px;
+overflow:hidden;
+margin-bottom:20px;
+}
+
+.project-preview{
+width:100%;
+height:320px;
+border:none;
+background:#fff;
+display:block;
+}
+
+/* for cases where we show a screenshot placeholder */
+.project-preview-img{
+width:100%;
+height:320px;
+object-fit:cover;
+object-position:top;
+display:block;
+}
+
+.project-info{
+padding:20px 24px;
+}
+
+.project-info h4{
+font-size:17px;
+margin-bottom:8px;
+}
+
+.project-info p{
+color:#94a3b8;
+font-size:14px;
+line-height:1.7;
+}
+
+.project-tags{
+display:flex;
+gap:8px;
+flex-wrap:wrap;
+margin-top:12px;
+}
+
+.tag{
+background:rgba(0,198,255,.1);
+border:1px solid rgba(0,198,255,.25);
+color:#00c6ff;
+font-size:12px;
+padding:3px 12px;
+border-radius:20px;
+}
+
+/* ===== EMBEDDED MINI DEMO — JBL page ===== */
+
+.demo-wrap{
+width:100%;
+height:420px;
+border-radius:12px;
+overflow:hidden;
+border:1px solid rgba(255,255,255,.08);
+}
+
+.demo-wrap iframe{
+width:100%;
+height:100%;
+border:none;
+}
+
+/* ABOUT */
+
+.about{
+margin-top:140px;
+text-align:center;
+}
+
+.about h2{
+font-size:40px;
+margin-bottom:20px;
+}
+
+.about p{
+max-width:750px;
+margin:auto;
+color:#94a3b8;
+font-size:18px;
+}
+
+/* CTA */
+
+.cta{
+margin-top:140px;
+text-align:center;
+}
+
+.cta-btn{
+display:inline-block;
+margin-top:25px;
+background:linear-gradient(90deg,#00c6ff,#0072ff);
+padding:18px 44px;
+border-radius:40px;
+text-decoration:none;
+color:white;
+font-size:18px;
+font-weight:600;
+}
+
+/* whatsapp button */
+
+.whatsapp{
+position:fixed;
+bottom:25px;
+right:25px;
+background:#25D366;
+width:55px;
+height:55px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:26px;
+color:white;
+text-decoration:none;
+box-shadow:0 5px 20px rgba(0,0,0,.4);
+z-index:500;
+}
+
+/* footer */
+
+footer{
+margin-top:140px;
+padding:40px;
+text-align:center;
+border-top:1px solid rgba(255,255,255,.08);
+color:#64748b;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+.hero h1{font-size:40px;}
+.hero h2{font-size:22px;}
+.services{grid-template-columns:1fr 1fr;}
+
+}
+
+@media(max-width:600px){
+
+.services{grid-template-columns:1fr;}
+.hero{padding:80px 0;}
+.hero h1{font-size:30px;}
+.hero h2{font-size:18px;}
+.project-preview{height:220px;}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <nav>
+    <div class="logo">
+      <img src="AB_logo_no_bg.png">
+      Austin Low
+    </div>
+    <a href="#contact" class="contact-btn">Contact</a>
+  </nav>
+
+  <section class="hero">
+    <img src="AB_logo_no_bg.png" class="hero-logo">
+    <h1>Automation Developer</h1>
+    <h2 id="typing"></h2>
+
+    <div class="services">
+
+      <!-- WEBSITE CARD -->
+      <div class="card" onclick="openModal('website')">
+        <h3>🌐 Website</h3>
+        <p>Modern responsive websites and landing pages.</p>
+        <span class="view-badge">View Examples →</span>
+      </div>
+
+      <!-- EXCEL CARD -->
+      <div class="card" onclick="openModal('excel')">
+        <h3>📊 Excel Automation</h3>
+        <p>Advanced Excel tools for pricing, stock and reporting.</p>
+        <span class="view-badge">View Examples →</span>
+      </div>
+
+      <!-- PYTHON CARD -->
+      <div class="card" onclick="openModal('python')">
+        <h3>🐍 Python Scripts</h3>
+        <p>Automation scripts and workflow systems.</p>
+        <span class="view-badge">View Examples →</span>
+      </div>
+
+      <!-- CUSTOM CARD -->
+      <div class="card" onclick="openModal('custom')">
+        <h3>⚙️ Custom Solutions</h3>
+        <p>Custom tools built for business operations.</p>
+        <span class="view-badge">View Examples →</span>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="about">
+    <h2>About My Work</h2>
+    <p>
+      I build automation systems that reduce manual work and improve business productivity.
+      From Excel automation tools to Python scripts and websites,
+      I create solutions that help companies save time and operate more efficiently.
+    </p>
+  </section>
+
+  <section class="cta" id="contact">
+    <h2>Let's Build Something Powerful</h2>
+    <p>Need automation tools or systems for your business?</p>
+    <a href="https://wa.me/601169699805" class="cta-btn">📩 DM For Enquiry</a>
+  </section>
+
+  <footer>
+    © 2026 Austin Low — Automation Developer
+  </footer>
+
+</div>
+
+<a class="whatsapp" href="https://wa.me/601169699805">💬</a>
+
+
+<!-- ============================================================
+     MODAL
+============================================================ -->
+
+<div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
+  <div class="modal">
+
+    <div class="modal-header">
+      <h3 id="modalTitle">Portfolio</h3>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+
+    <div class="modal-body">
+
+      <!-- ====== WEBSITE EXAMPLES ====== -->
+      <div id="tab-website" class="tab-content active">
+
+        <!-- Project 1: TMT JBL -->
+        <div class="project-card">
+          <div class="demo-wrap">
+            <iframe src="tmt-jbl.html" title="TMT JBL Demo"></iframe>
+          </div>
+          <div class="project-info">
+            <h4>TMT JBL — Product Landing Page</h4>
+            <p>A sleek, dark-themed product page for JBL audio gear. Features product showcase, specs table, and a responsive buy section — built with pure HTML/CSS/JS.</p>
+            <div class="project-tags">
+              <span class="tag">HTML</span>
+              <span class="tag">CSS</span>
+              <span class="tag">JavaScript</span>
+              <span class="tag">Landing Page</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 2 placeholder — add your own -->
+        <div class="project-card">
+          <div style="height:180px;background:linear-gradient(135deg,#0f1628,#1a2540);display:flex;align-items:center;justify-content:center;color:#64748b;font-size:15px;">
+            🚧 More projects coming soon
+          </div>
+          <div class="project-info">
+            <h4>Your Next Project</h4>
+            <p>Have a website in mind? Let's build it together.</p>
+            <div class="project-tags">
+              <span class="tag">Business</span>
+              <span class="tag">Landing Page</span>
+              <span class="tag">E-commerce</span>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /website -->
+
+
+      <!-- ====== EXCEL EXAMPLES ====== -->
+      <div id="tab-excel" class="tab-content">
+
+        <div class="project-card">
+          <div style="height:220px;background:linear-gradient(135deg,#0d1f12,#143d1e);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:#4ade80;">
+            <div style="font-size:52px;">📊</div>
+            <div style="font-size:16px;font-weight:600;">Pricing Automation Tool</div>
+            <div style="font-size:13px;color:#86efac;max-width:300px;text-align:center;">Auto-calculates cost, margin & selling price across 500+ SKUs</div>
+          </div>
+          <div class="project-info">
+            <h4>Dynamic Pricing Spreadsheet</h4>
+            <p>Excel workbook with VBA macros that auto-populate supplier costs, apply margin rules, and generate a formatted price list PDF — saving 3+ hours per week.</p>
+            <div class="project-tags">
+              <span class="tag">Excel VBA</span>
+              <span class="tag">Pricing</span>
+              <span class="tag">Automation</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div style="height:180px;background:linear-gradient(135deg,#0f1628,#1a2540);display:flex;align-items:center;justify-content:center;color:#64748b;font-size:15px;">
+            🚧 More projects coming soon
+          </div>
+          <div class="project-info">
+            <h4>Stock & Inventory Tracker</h4>
+            <p>Smart inventory dashboard with low-stock alerts and reorder automation.</p>
+            <div class="project-tags">
+              <span class="tag">Excel</span>
+              <span class="tag">Inventory</span>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /excel -->
+
+
+      <!-- ====== PYTHON EXAMPLES ====== -->
+      <div id="tab-python" class="tab-content">
+
+        <div class="project-card">
+          <div style="background:#0d0d0d;padding:24px 28px;font-family:'Courier New',monospace;font-size:13px;line-height:1.8;color:#a9dc76;border-radius:0;">
+            <div style="color:#6272a4;margin-bottom:8px;"># Multi-platform order export — Shopee, Lazada, TikTok Shop</div>
+            <div><span style="color:#ff79c6;">import</span> pandas <span style="color:#ff79c6;">as</span> pd</div>
+            <div><span style="color:#ff79c6;">import</span> glob, os</div>
+            <div>&nbsp;</div>
+            <div><span style="color:#ff79c6;">def</span> <span style="color:#50fa7b;">merge_orders</span>(folder):</div>
+            <div>&nbsp;&nbsp;&nbsp;&nbsp;files = glob.<span style="color:#8be9fd;">glob</span>(f<span style="color:#f1fa8c;">"{folder}/*.xlsx"</span>)</div>
+            <div>&nbsp;&nbsp;&nbsp;&nbsp;frames = []</div>
+            <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff79c6;">for</span> f <span style="color:#ff79c6;">in</span> files:</div>
+            <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;platform = os.path.<span style="color:#8be9fd;">basename</span>(f).<span style="color:#8be9fd;">split</span>(<span style="color:#f1fa8c;">"_"</span>)[0]</div>
+            <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;df = pd.<span style="color:#8be9fd;">read_excel</span>(f)</div>
+            <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;df[<span style="color:#f1fa8c;">"Platform"</span>] = platform</div>
+            <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;frames.<span style="color:#8be9fd;">append</span>(df)</div>
+            <div>&nbsp;&nbsp;&nbsp;&nbsp;merged = pd.<span style="color:#8be9fd;">concat</span>(frames, ignore_index=<span style="color:#ff79c6;">True</span>)</div>
+            <div>&nbsp;&nbsp;&nbsp;&nbsp;merged.<span style="color:#8be9fd;">to_excel</span>(<span style="color:#f1fa8c;">"combined_orders.xlsx"</span>, index=<span style="color:#ff79c6;">False</span>)</div>
+            <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#6272a4;">print</span>(<span style="color:#f1fa8c;">f"✅ {len(merged)} orders merged from {len(files)} platforms"</span>)</div>
+          </div>
+          <div class="project-info">
+            <h4>Auto Export Multi-Platform Orders</h4>
+            <p>Python script that pulls order exports from Shopee, Lazada, and TikTok Shop, standardises the column format, and merges everything into one master Excel file — ready for fulfilment or accounting with a single click.</p>
+            <div class="project-tags">
+              <span class="tag">Python</span>
+              <span class="tag">Shopee</span>
+              <span class="tag">Lazada</span>
+              <span class="tag">TikTok Shop</span>
+              <span class="tag">Excel</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div style="background:#0d0d0d;padding:24px 28px;font-family:'Courier New',monospace;font-size:13px;line-height:1.8;color:#a9dc76;border-radius:0;">
+            <div style="color:#6272a4;margin-bottom:8px;"># Web scraper — track competitor prices daily</div>
+            <div><span style="color:#ff79c6;">from</span> bs4 <span style="color:#ff79c6;">import</span> BeautifulSoup</div>
+            <div><span style="color:#ff79c6;">import</span> requests, pandas <span style="color:#ff79c6;">as</span> pd</div>
+            <div>&nbsp;</div>
+            <div><span style="color:#ff79c6;">def</span> <span style="color:#50fa7b;">scrape_prices</span>(urls):</div>
+            <div>&nbsp;&nbsp;&nbsp;&nbsp;results = []</div>
+            <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff79c6;">for</span> url <span style="color:#ff79c6;">in</span> urls:</div>
+            <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;soup = BeautifulSoup(requests.<span style="color:#8be9fd;">get</span>(url).text)</div>
+            <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;price = soup.<span style="color:#8be9fd;">find</span>(<span style="color:#f1fa8c;">"span"</span>, class_=<span style="color:#f1fa8c;">"price"</span>).text</div>
+            <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;results.<span style="color:#8be9fd;">append</span>({<span style="color:#f1fa8c;">"url"</span>: url, <span style="color:#f1fa8c;">"price"</span>: price})</div>
+            <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff79c6;">return</span> pd.<span style="color:#8be9fd;">DataFrame</span>(results)</div>
+          </div>
+          <div class="project-info">
+            <h4>Competitor Price Scraper</h4>
+            <p>Daily web scraper that monitors competitor product prices, logs them into Excel, and sends an alert when a price drops below your threshold.</p>
+            <div class="project-tags">
+              <span class="tag">Python</span>
+              <span class="tag">Web Scraping</span>
+              <span class="tag">BeautifulSoup</span>
+              <span class="tag">Excel</span>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /python -->
+
+
+      <!-- ====== CUSTOM EXAMPLES ====== -->
+      <div id="tab-custom" class="tab-content">
+
+        <div class="project-card">
+          <div style="height:220px;background:linear-gradient(135deg,#1a0d2e,#2d1155);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;color:#c084fc;">
+            <div style="font-size:52px;">⚙️</div>
+            <div style="font-size:16px;font-weight:600;">Order Management Dashboard</div>
+            <div style="font-size:13px;color:#d8b4fe;max-width:300px;text-align:center;">Real-time order tracking, stock sync &amp; WhatsApp notifications</div>
+          </div>
+          <div class="project-info">
+            <h4>Custom Business Operations Tool</h4>
+            <p>End-to-end system for a SME — tracks incoming orders, updates stock in real time, and fires WhatsApp alerts to the sales team when stock runs low.</p>
+            <div class="project-tags">
+              <span class="tag">Python</span>
+              <span class="tag">Excel</span>
+              <span class="tag">WhatsApp API</span>
+              <span class="tag">Dashboard</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div style="height:180px;background:linear-gradient(135deg,#0f1628,#1a2540);display:flex;align-items:center;justify-content:center;color:#64748b;font-size:15px;">
+            🚧 More projects coming soon
+          </div>
+          <div class="project-info">
+            <h4>Have a unique requirement?</h4>
+            <p>Custom solutions are built from scratch around your exact workflow. Let's chat.</p>
+            <div class="project-tags">
+              <span class="tag">Anything</span>
+              <span class="tag">Custom</span>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /custom -->
+
+    </div><!-- /modal-body -->
+  </div><!-- /modal -->
+</div><!-- /modal-overlay -->
+
+
+
+<script>
+// ── Modal logic ──────────────────────────────────────────────────────────────
+
+const titles = {
+  website : "🌐 Website Examples",
+  excel   : "📊 Excel Automation Examples",
+  python  : "🐍 Python Script Examples",
+  custom  : "⚙️ Custom Solution Examples"
+};
+
+function openModal(type){
+  // hide all tab contents
+  document.querySelectorAll(".tab-content").forEach(el => el.classList.remove("active"));
+  // show relevant tab
+  const target = document.getElementById("tab-" + type);
+  if(target) target.classList.add("active");
+  // set title
+  document.getElementById("modalTitle").textContent = titles[type] || "Portfolio";
+  // show overlay
+  document.getElementById("modalOverlay").classList.add("active");
+  document.body.style.overflow = "hidden";
+}
+
+function closeModal(){
+  document.getElementById("modalOverlay").classList.remove("active");
+  document.body.style.overflow = "";
+}
+
+function handleOverlayClick(e){
+  if(e.target === document.getElementById("modalOverlay")) closeModal();
+}
+
+// close on ESC
+document.addEventListener("keydown", e => { if(e.key === "Escape") closeModal(); });
+
+
+// ── Typing animation ─────────────────────────────────────────────────────────
+
+const text = [
+  "Building tools for businesses",
+  "Website Development",
+  "Excel Automation",
+  "Python Automation",
+  "Custom Business Solutions"
+];
+
+let count = 0, index = 0;
+
+(function type(){
+  if(count === text.length) count = 0;
+  const currentText = text[count];
+  const letter = currentText.slice(0, ++index);
+  document.getElementById("typing").textContent = letter;
+  if(letter.length === currentText.length){
+    count++; index = 0;
+    setTimeout(type, 1500);
+  } else {
+    setTimeout(type, 70);
+  }
+})();
+</script>
+
+</body>
+</html>

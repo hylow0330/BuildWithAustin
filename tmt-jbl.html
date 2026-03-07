@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>JBL — TMT Thundermatch</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;800;900&family=Barlow+Condensed:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+/* ══════════════════════════════
+   ORIGINAL TMT HEADER
+══════════════════════════════ */
+.header-top{
+  background:#fff;display:flex;align-items:center;
+  justify-content:center;padding:18px 40px;
+  position:relative;border-bottom:1px solid #eee;
+}
+.logo{display:flex;flex-direction:column;align-items:center;text-decoration:none;}
+.logo img{height:80px;object-fit:contain;}
+.logo-text{display:flex;flex-direction:column;align-items:center;}
+.logo-text .tmt{font-size:48px;font-weight:900;color:#cc0000;letter-spacing:-2px;line-height:1;font-family:'Arial Black',sans-serif;}
+.logo-text .brand-name{font-size:11px;font-weight:700;letter-spacing:4px;color:#111;margin-top:2px;}
+.header-icons{position:absolute;right:40px;display:flex;gap:20px;align-items:center;}
+.header-icons a{color:#111;text-decoration:none;transition:color 0.2s;}
+.header-icons a:hover{color:#cc0000;}
+.header-icons svg{width:22px;height:22px;}
+
+.header-nav{background:#fff;border-top:1px solid #eee;border-bottom:2px solid #eee;}
+.header-nav ul{list-style:none;display:flex;justify-content:center;}
+.header-nav ul li a{
+  display:block;padding:14px 24px;font-size:12px;font-weight:700;
+  letter-spacing:1.2px;color:#111;text-decoration:none;
+  text-transform:uppercase;position:relative;transition:color 0.2s;
+}
+.header-nav ul li a::after{
+  content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);
+  width:0;height:2px;background:#cc0000;transition:width 0.25s;
+}
+.header-nav ul li a:hover{color:#cc0000;}
+.header-nav ul li a:hover::after{width:80%;}
+
+/* ══════════════════════════════
+   BREADCRUMB
+══════════════════════════════ */
+.breadcrumb{
+  background:#fff;padding:10px 40px;
+  font-size:12px;color:#999;border-bottom:1px solid #eee;
+}
+.breadcrumb a{color:#999;text-decoration:none;}
+.breadcrumb a:hover{color:var(--red);}
+.breadcrumb span{color:#333;font-weight:600;}
+
+:root{
+  --red:#cc0000;
+  --page-bg:#f4f4f4;
+  --jbl-org:#FF5500;
+  --jbl-org2:#E64D00;
+  --jbl-org3:#FF7733;
+  --jbl-org-lt:#FFF0E8;
+  --jbl-org-xlt:#FFF8F4;
+  --white:#ffffff;
+  --off:#FAFAFA;
+  --gray1:#F4F4F4;
+  --gray2:#E8E8E8;
+  --gray3:#AAAAAA;
+  --gray4:#555555;
+  --black:#111111;
+  --text:#1A1A1A;
+  --gold:#c8a951;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;background:var(--white);color:var(--text);}
+
+/* ════════════════════════════════════════════
+   HERO
+════════════════════════════════════════════ */
+.hero{
+  background:var(--jbl-org);
+  padding:72px 0 0;
+  position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background-image:radial-gradient(rgba(255,255,255,0.07) 1.5px,transparent 1.5px);
+  background-size:24px 24px;
+  pointer-events:none;z-index:1;
+}
+.hero::after{
+  content:'';position:absolute;top:-100px;left:50%;transform:translateX(-50%);
+  width:800px;height:600px;border-radius:50%;
+  background:radial-gradient(ellipse at 50% 0%,rgba(255,255,255,0.12) 0%,transparent 60%);
+  pointer-events:none;z-index:1;
+}
+.hero-arc{display:none;}
+.hero-inner{
+  max-width:1280px;margin:0 auto;padding:0 48px;
+  position:relative;z-index:3;
+}
+.hero-top-row{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:48px;padding-top:8px;
+}
+.hero-badge{
+  background:rgba(255,255,255,0.18);backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,0.25);
+  border-radius:100px;padding:7px 20px;
+  font-size:10px;font-weight:800;letter-spacing:3px;
+  color:#fff;text-transform:uppercase;
+  display:inline-flex;align-items:center;gap:8px;
+}
+.hero-badge::before{content:'●';font-size:7px;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.2;}}
+.hero-badge-right{
+  font-size:11px;font-weight:700;color:rgba(255,255,255,0.7);
+  letter-spacing:1px;
+}
+.hero-title-block{text-align:center;margin-bottom:40px;}
+.hero-overline{
+  font-size:11px;font-weight:700;letter-spacing:6px;
+  color:rgba(255,255,255,0.6);text-transform:uppercase;
+  margin-bottom:16px;display:block;
+}
+.hero-title{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:140px;font-weight:900;line-height:0.8;
+  color:#fff;letter-spacing:-6px;text-transform:uppercase;
+  text-shadow:0 4px 40px rgba(0,0,0,0.15);
+}
+.hero-title .white-out{
+  -webkit-text-stroke:3px #fff;color:transparent;
+}
+.hero-title .small-line{
+  font-size:60px;letter-spacing:-1px;
+  display:block;color:rgba(255,255,255,0.6);
+  font-weight:700;
+}
+.hero-stats{
+  display:flex;justify-content:center;gap:2px;
+  margin-bottom:44px;
+}
+.hstat{
+  background:rgba(0,0,0,0.18);backdrop-filter:blur(6px);
+  padding:12px 32px;text-align:center;
+  border-right:1px solid rgba(255,255,255,0.15);
+  flex:1;max-width:240px;
+}
+.hstat:last-child{border-right:none;}
+.hstat-num{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:32px;font-weight:900;color:#fff;
+  letter-spacing:-1px;line-height:1;
+}
+.hstat-label{font-size:9px;font-weight:700;letter-spacing:2px;color:rgba(255,255,255,0.55);text-transform:uppercase;margin-top:4px;}
+.hero-ctas{display:flex;gap:14px;justify-content:center;margin-bottom:0;}
+.btn-white{
+  background:#fff;color:var(--jbl-org);
+  padding:15px 40px;font-size:12px;font-weight:800;letter-spacing:1.5px;
+  text-transform:uppercase;text-decoration:none;display:inline-block;
+  border-radius:4px;transition:all 0.2s;
+  box-shadow:0 4px 20px rgba(0,0,0,0.15);
+}
+.btn-white:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,0.2);}
+.btn-white-out{
+  background:transparent;color:#fff;
+  padding:14px 40px;font-size:12px;font-weight:700;letter-spacing:1.5px;
+  text-transform:uppercase;text-decoration:none;display:inline-block;
+  border:2px solid rgba(255,255,255,0.5);border-radius:4px;
+  transition:all 0.2s;
+}
+.btn-white-out:hover{border-color:#fff;background:rgba(255,255,255,0.08);}
+.hero-products{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:2px;
+  background:rgba(0,0,0,0.15);
+  margin-top:56px;
+}
+.hero-prod-card{
+  position:relative;overflow:hidden;
+  height:220px;cursor:pointer;
+  background:rgba(255,255,255,0.08);
+  backdrop-filter:blur(8px);
+  transition:background 0.3s;
+}
+.hero-prod-card:hover{background:rgba(255,255,255,0.15);}
+.hero-prod-card::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:3px;
+  background:#fff;z-index:3;
+  transform:scaleX(0);transition:transform 0.35s;transform-origin:left;
+}
+.hero-prod-card:hover::after{transform:scaleX(1);}
+.hpc-geo{
+  position:absolute;right:-30px;top:50%;
+  transform:translateY(-50%);
+  width:75%;height:75%;
+  opacity:0.12;
+  transition:opacity 0.4s, transform 0.5s;
+  z-index:0;
+}
+.hero-prod-card:hover .hpc-geo{
+  opacity:0.22;
+  transform:translateY(-50%) scale(1.06) rotate(4deg);
+}
+.hpc-geo2{
+  position:absolute;left:-24px;top:-24px;
+  width:35%;height:35%;
+  opacity:0.07;
+  transition:opacity 0.4s;
+  z-index:0;
+}
+.hero-prod-card:hover .hpc-geo2{opacity:0.13;}
+.hpc-text{
+  position:absolute;bottom:0;left:0;
+  z-index:2;padding:20px 20px 18px;width:100%;
+}
+.hpc-kicker{
+  font-size:9px;font-weight:700;letter-spacing:3px;
+  color:rgba(255,255,255,0.55);text-transform:uppercase;
+  margin-bottom:7px;display:block;
+}
+.hpc-name{
+  font-size:18px;font-weight:800;color:#fff;
+  line-height:1.15;margin-bottom:12px;letter-spacing:-0.3px;
+}
+.hpc-explore{
+  font-size:9px;font-weight:700;letter-spacing:3px;
+  color:rgba(255,255,255,0.6);text-transform:uppercase;
+  text-decoration:none;display:inline-flex;align-items:center;gap:6px;
+  transition:color 0.2s,gap 0.2s;
+}
+.hpc-explore::after{content:'→';transition:transform 0.2s;}
+.hero-prod-card:hover .hpc-explore{color:#fff;gap:10px;}
+.hero-prod-card:hover .hpc-explore::after{transform:translateX(3px);}
+.hero-wave{
+  height:80px;background:var(--white);
+  clip-path:ellipse(58% 100% at 50% 100%);
+  margin-top:-2px;
+}
+
+/* ════════════════════════════════════════════
+   PROMOTION SECTION
+════════════════════════════════════════════ */
+.promo-section{background:var(--off);padding:72px 0;}
+.promo-inner{max-width:1280px;margin:0 auto;padding:0 48px;}
+.sec-eyebrow{
+  display:flex;align-items:center;gap:12px;
+  font-size:10px;font-weight:800;letter-spacing:4px;
+  color:var(--jbl-org);text-transform:uppercase;margin-bottom:12px;
+}
+.sec-eyebrow::after{content:'';flex:1;height:2px;background:var(--gray2);}
+.sec-heading{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:40px;font-weight:900;color:var(--text);
+  text-transform:uppercase;letter-spacing:-1px;margin-bottom:36px;
+}
+.sec-heading em{color:var(--jbl-org);font-style:normal;}
+.promo-flash{
+  background:var(--text);border-radius:16px;
+  display:grid;grid-template-columns:1fr 340px;
+  overflow:hidden;margin-bottom:16px;position:relative;
+}
+.promo-flash::before{
+  content:'';position:absolute;top:0;left:0;bottom:0;width:4px;
+  background:var(--jbl-org);border-radius:16px 0 0 16px;
+}
+.pf-left{padding:48px 52px 48px 56px;display:flex;flex-direction:column;justify-content:space-between;}
+.pf-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(255,85,0,0.15);border:1px solid rgba(255,85,0,0.25);
+  color:var(--jbl-org);padding:5px 14px;border-radius:4px;
+  font-size:10px;font-weight:800;letter-spacing:3px;text-transform:uppercase;
+  width:fit-content;margin-bottom:18px;
+}
+.pf-blink{width:6px;height:6px;border-radius:50%;background:var(--jbl-org);animation:blink 1.5s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0.15;}}
+.pf-title{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:52px;font-weight:900;color:#fff;
+  letter-spacing:-2px;line-height:0.88;text-transform:uppercase;
+  margin-bottom:12px;
+}
+.pf-title em{color:var(--jbl-org);font-style:normal;}
+.pf-desc{font-size:13px;color:rgba(255,255,255,0.4);line-height:1.8;margin-bottom:28px;max-width:480px;}
+.pf-bottom{display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
+.countdown{display:flex;gap:6px;align-items:center;}
+.cd-blk{
+  background:var(--jbl-org);border-radius:6px;
+  padding:10px 14px;min-width:54px;text-align:center;
+}
+.cd-num{font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:900;color:#fff;line-height:1;}
+.cd-lbl{font-size:8px;font-weight:700;letter-spacing:1.5px;color:rgba(255,255,255,0.7);text-transform:uppercase;margin-top:2px;}
+.cd-sep{font-size:22px;font-weight:900;color:var(--jbl-org);}
+.pf-right{
+  background:linear-gradient(160deg,#1a1a1a,#222);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;border-left:1px solid #2a2a2a;
+}
+.pf-right::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 40%,rgba(255,85,0,0.12) 0%,transparent 60%);
+}
+.pf-pct-wrap{position:relative;z-index:2;text-align:center;}
+.pf-pct{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:110px;font-weight:900;color:var(--jbl-org);
+  letter-spacing:-6px;line-height:0.82;
+  text-shadow:0 0 50px rgba(255,85,0,0.4);
+}
+.pf-off{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:700;color:rgba(255,255,255,0.5);letter-spacing:2px;text-transform:uppercase;}
+.pf-note{font-size:10px;color:#555;letter-spacing:2px;text-transform:uppercase;margin-top:8px;}
+.promo-bottom{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px;}
+.voucher-card{
+  background:var(--jbl-org);border-radius:12px;
+  padding:32px 32px;display:flex;align-items:center;gap:32px;
+  position:relative;overflow:hidden;
+}
+.voucher-card::before{
+  content:'';position:absolute;right:-30px;top:-30px;
+  width:140px;height:140px;border-radius:50%;background:rgba(255,255,255,0.07);
+}
+.voucher-card::after{
+  content:'';position:absolute;right:40px;bottom:-30px;
+  width:90px;height:90px;border-radius:50%;background:rgba(255,255,255,0.04);
+}
+.vc-icon{font-size:36px;flex-shrink:0;position:relative;z-index:2;}
+.vc-content{position:relative;z-index:2;flex:1;}
+.vc-lbl{font-size:10px;font-weight:800;letter-spacing:3px;color:rgba(255,255,255,0.65);text-transform:uppercase;margin-bottom:10px;}
+.vc-code{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:32px;font-weight:900;color:#fff;letter-spacing:4px;
+  background:rgba(255,255,255,0.12);padding:10px 20px;
+  border:1.5px dashed rgba(255,255,255,0.35);
+  cursor:pointer;transition:background 0.2s;display:inline-block;
+  border-radius:6px;margin-bottom:10px;
+}
+.vc-code:hover{background:rgba(255,255,255,0.22);}
+.vc-info{font-size:12px;color:rgba(255,255,255,0.6);line-height:1.6;}
+.vc-info strong{color:#fff;}
+.gift-card{
+  background:var(--white);border-radius:12px;
+  border:1.5px solid var(--gray2);
+  padding:32px 32px;display:flex;align-items:center;gap:32px;
+  position:relative;overflow:hidden;transition:box-shadow 0.2s;
+}
+.gift-card:hover{box-shadow:0 8px 32px rgba(255,85,0,0.1);}
+.gift-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:var(--jbl-org);border-radius:12px 12px 0 0;
+}
+.gc-icon{font-size:40px;flex-shrink:0;}
+.gc-content{flex:1;}
+.gc-type{font-size:10px;font-weight:800;letter-spacing:3px;color:var(--jbl-org);text-transform:uppercase;margin-bottom:8px;}
+.gc-title{font-size:18px;font-weight:800;color:var(--text);margin-bottom:8px;line-height:1.25;}
+.gc-desc{font-size:13px;color:var(--gray4);line-height:1.7;margin-bottom:14px;}
+.gc-link{
+  font-size:11px;font-weight:800;color:var(--jbl-org);
+  text-decoration:none;letter-spacing:1.5px;text-transform:uppercase;
+  display:inline-flex;align-items:center;gap:6px;transition:gap 0.2s;
+}
+.gc-link:hover{gap:10px;}
+
+/* ════════════════════════════════════════════
+   USE CASE SELECTOR
+════════════════════════════════════════════ */
+.usecase-section{background:var(--white);border-top:2px solid var(--gray2);}
+.usecase-tabs{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  border-bottom:2px solid var(--gray2);
+}
+.uc-tab{
+  padding:28px 24px;display:flex;align-items:center;gap:16px;
+  cursor:pointer;transition:all 0.2s;
+  border-right:1px solid var(--gray2);
+  position:relative;background:var(--white);
+}
+.uc-tab:last-child{border-right:none;}
+.uc-tab::after{
+  content:'';position:absolute;bottom:-2px;left:0;right:0;height:3px;
+  background:var(--jbl-org);transform:scaleX(0);transition:transform 0.3s;
+}
+.uc-tab.active{background:var(--jbl-org-xlt);}
+.uc-tab.active::after{transform:scaleX(1);}
+.uc-tab:hover:not(.active){background:var(--jbl-org-xlt);}
+.uc-emoji{font-size:28px;flex-shrink:0;}
+.uc-name{font-size:14px;font-weight:800;color:var(--text);margin-bottom:3px;}
+.uc-sub{font-size:11px;color:var(--gray3);}
+.uc-tab.active .uc-name{color:var(--jbl-org);}
+.usecase-panel{
+  display:none;padding:40px 48px;
+  background:var(--jbl-org-xlt);
+  animation:fadeIn 0.3s ease;
+}
+.usecase-panel.active{display:grid;grid-template-columns:280px 1fr;gap:40px;align-items:start;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+.uc-panel-tag{font-size:10px;font-weight:800;letter-spacing:3px;color:var(--jbl-org);text-transform:uppercase;margin-bottom:10px;}
+.uc-panel-title{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:32px;font-weight:900;color:var(--text);
+  text-transform:uppercase;letter-spacing:-0.5px;line-height:1;margin-bottom:12px;
+}
+.uc-panel-desc{font-size:13px;color:var(--gray4);line-height:1.75;margin-bottom:20px;}
+.uc-panel-recs{display:flex;flex-direction:column;gap:8px;}
+.uc-rec{display:flex;align-items:center;gap:10px;font-size:12px;color:var(--gray4);}
+.uc-rec::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--jbl-org);flex-shrink:0;}
+.uc-panel-products{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.uc-prod-card{
+  background:var(--white);border-radius:10px;
+  border:1.5px solid var(--gray2);
+  padding:18px;cursor:pointer;
+  transition:box-shadow 0.2s,transform 0.2s;
+  position:relative;overflow:hidden;
+}
+.uc-prod-card:hover{box-shadow:0 6px 24px rgba(255,85,0,0.1);transform:translateY(-2px);}
+.uc-prod-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:var(--jbl-org);transform:scaleX(0);transition:transform 0.3s;transform-origin:left;
+}
+.uc-prod-card:hover::before{transform:scaleX(1);}
+.uc-prod-img{
+  height:100px;display:flex;align-items:center;justify-content:center;
+  background:var(--gray1);border-radius:6px;margin-bottom:12px;font-size:32px;
+}
+.uc-prod-name{font-size:12px;font-weight:700;color:var(--text);margin-bottom:4px;line-height:1.3;}
+.uc-prod-price{font-size:14px;font-weight:800;color:var(--jbl-org);}
+.uc-prod-was{font-size:11px;color:var(--gray3);text-decoration:line-through;margin-left:6px;}
+
+/* ════════════════════════════════════════════
+   PRODUCT SECTIONS
+════════════════════════════════════════════ */
+.products-zone{max-width:1280px;margin:0 auto;padding:52px 48px;}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:24px;}
+.sec-ol{font-size:10px;font-weight:800;letter-spacing:3px;color:var(--jbl-org);text-transform:uppercase;margin-bottom:5px;display:flex;align-items:center;gap:8px;}
+.sec-ol::after{content:'';width:28px;height:2px;background:var(--jbl-org);}
+.sec-ttl{font-family:'Barlow Condensed',sans-serif;font-size:30px;font-weight:900;color:var(--text);text-transform:uppercase;letter-spacing:-0.5px;line-height:1;}
+.sec-cnt{font-size:11px;color:var(--gray3);margin-top:3px;}
+.sec-lnk{
+  font-size:11px;font-weight:800;color:var(--jbl-org);
+  text-decoration:none;letter-spacing:1px;text-transform:uppercase;
+  border-bottom:2px solid var(--jbl-org-lt);padding-bottom:2px;
+  transition:border-color 0.2s;
+}
+.sec-lnk:hover{border-color:var(--jbl-org);}
+.lifestyle-banner{
+  background:var(--jbl-org);
+  display:grid;grid-template-columns:1fr auto 1fr;
+  align-items:center;padding:48px 80px;
+  position:relative;overflow:hidden;
+}
+.lifestyle-banner::before{
+  content:'';position:absolute;inset:0;
+  background-image:radial-gradient(rgba(255,255,255,0.06) 1.5px,transparent 1.5px);
+  background-size:24px 24px;
+}
+.lb-left{position:relative;z-index:2;}
+.lb-overline{font-size:10px;font-weight:800;letter-spacing:4px;color:rgba(255,255,255,0.6);text-transform:uppercase;margin-bottom:10px;}
+.lb-title{font-family:'Barlow Condensed',sans-serif;font-size:56px;font-weight:900;color:#fff;text-transform:uppercase;letter-spacing:-2px;line-height:0.88;}
+.lb-title em{-webkit-text-stroke:2px #fff;color:transparent;font-style:normal;}
+.lb-center{position:relative;z-index:2;text-align:center;padding:0 60px;}
+.lb-center-icon{font-size:64px;display:block;filter:drop-shadow(0 4px 12px rgba(0,0,0,0.2));}
+.lb-right{position:relative;z-index:2;text-align:right;}
+.lb-desc{font-size:14px;color:rgba(255,255,255,0.7);line-height:1.75;max-width:320px;margin-left:auto;margin-bottom:20px;}
+.btn-wh-sm{
+  background:#fff;color:var(--jbl-org);
+  padding:12px 28px;font-size:11px;font-weight:800;letter-spacing:1.5px;
+  text-transform:uppercase;text-decoration:none;display:inline-block;
+  border-radius:4px;transition:all 0.2s;box-shadow:0 4px 16px rgba(0,0,0,0.15);
+}
+.btn-wh-sm:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.2);}
+
+/* ════════════════════════════════════════════
+   SOUND QUALITY SECTION
+════════════════════════════════════════════ */
+.sound-section{background:var(--off);padding:80px 0;}
+.sound-inner{max-width:1280px;margin:0 auto;padding:0 48px;}
+.sound-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--gray2);margin-top:48px;}
+.sound-card{background:var(--white);padding:40px 36px;transition:background 0.2s;position:relative;overflow:hidden;}
+.sound-card:hover{background:var(--jbl-org-xlt);}
+.sound-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--jbl-org);transform:scaleX(0);transition:transform 0.3s;transform-origin:left;}
+.sound-card:hover::after{transform:scaleX(1);}
+.sc-icon{font-size:36px;margin-bottom:18px;}
+.sc-title{font-size:16px;font-weight:800;color:var(--text);margin-bottom:10px;}
+.sc-desc{font-size:13px;color:var(--gray4);line-height:1.75;}
+
+/* ══════════════════════════════
+   PRODUCT GRID
+══════════════════════════════ */
+.product-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:16px;background:transparent;margin-bottom:52px;
+}
+.product-card{
+  background:#fff;border-radius:16px;
+  position:relative;overflow:hidden;
+  cursor:pointer;display:flex;flex-direction:column;
+  box-shadow:0 2px 8px rgba(0,0,0,0.08);
+  transition:box-shadow 0.25s,transform 0.25s;
+}
+.product-card:hover{box-shadow:0 8px 28px rgba(0,0,0,0.14);transform:translateY(-4px);}
+.card-badge{
+  position:absolute;top:14px;right:14px;z-index:3;
+  background:var(--red);color:#fff;
+  padding:5px 14px;border-radius:20px;font-size:12px;font-weight:700;
+}
+.card-tag{
+  position:absolute;top:14px;left:14px;z-index:3;
+  background:#111;color:#fff;
+  padding:4px 10px;border-radius:4px;
+  font-size:10px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;
+}
+.card-img{
+  height:220px;display:flex;align-items:center;justify-content:center;
+  background:#f8f8f8;padding:28px;position:relative;overflow:hidden;
+}
+.card-placeholder{
+  width:100%;height:100%;display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:10px;color:#ccc;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;
+}
+.card-placeholder svg{width:44px;height:44px;opacity:0.3;}
+.card-body{padding:16px 16px 20px;}
+.card-cat{font-size:10px;font-weight:600;letter-spacing:1px;color:#999;text-transform:uppercase;margin-bottom:6px;}
+.card-name{font-size:14px;font-weight:700;color:#111;margin-bottom:10px;line-height:1.4;}
+.card-div{height:1px;background:#f0f0f0;margin-bottom:10px;}
+.card-colors{display:flex;gap:7px;margin-bottom:12px;}
+.cdot{width:18px;height:18px;border-radius:50%;cursor:pointer;border:2px solid #eee;transition:border-color 0.2s,transform 0.2s;}
+.cdot:hover{border-color:#aaa;}
+.cdot.active{border-color:#555;transform:scale(1.1);}
+.card-promo{display:flex;align-items:center;gap:5px;font-size:12px;font-weight:600;color:var(--red);margin-bottom:4px;}
+.card-price-row{display:flex;align-items:baseline;gap:8px;margin-bottom:4px;}
+.card-price{font-size:16px;font-weight:800;color:#111;}
+.card-orig{font-size:12px;color:#bbb;text-decoration:line-through;}
+.card-voucher{font-size:11px;font-weight:600;color:var(--gold);}
+
+/* ══════════════════════════════
+   FOOTER — MAIN
+══════════════════════════════ */
+.footer-main{
+  background:#111;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:0;
+  padding:56px 60px;
+  border-top:3px solid var(--jbl-org);
+}
+.footer-col{padding:0 20px 0 0;}
+.footer-col h4{
+  font-size:11px;font-weight:800;letter-spacing:2.5px;
+  text-transform:uppercase;color:#fff;
+  margin-bottom:20px;padding-bottom:12px;
+  border-bottom:1px solid #2a2a2a;
+}
+.footer-col ul{list-style:none;}
+.footer-col ul li{margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;}
+.footer-col ul li a{
+  font-size:13px;color:#999;text-decoration:none;
+  transition:color 0.2s;display:block;
+}
+.footer-col ul li a:hover{color:var(--jbl-org);}
+.arrow{font-size:11px;color:#555;}
+
+/* Payment badges */
+.pay-label{
+  font-size:10px;font-weight:700;letter-spacing:2px;
+  text-transform:uppercase;color:#666;margin-bottom:10px;
+}
+.pay-grid{
+  display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px;
+}
+.pay-badge{
+  background:#1e1e1e;border:1px solid #2a2a2a;
+  border-radius:4px;padding:5px 8px;
+  font-size:9px;font-weight:800;color:#bbb;
+  letter-spacing:0.5px;text-transform:uppercase;
+  display:flex;align-items:center;justify-content:center;
+  min-width:44px;text-align:center;line-height:1.3;
+  transition:border-color 0.2s,color 0.2s;
+  cursor:default;
+}
+.pay-badge:hover{border-color:#444;color:#fff;}
+/* Brand colour hints */
+.pay-badge.visa{color:#1a1f71;}
+.pay-badge.amex{color:#007bc1;}
+.pay-badge.fpx{color:#f26522;}
+.pay-badge.touchngo{color:#1e88e5;}
+.pay-badge.grabpay{color:#00b14f;}
+.pay-badge.boost{color:#e03;}
+.pay-badge.mae{color:#d81b60;}
+.pay-badge.shopeepay{color:#ee4d2d;}
+.pay-badge.cimb{color:#c00;}
+.pay-badge.hlb{color:#e30613;}
+.pay-badge.hsbc{color:#db0011;}
+.pay-badge.maybank{color:#f5a623;}
+.pay-badge.affin{color:#004a97;}
+.pay-badge.atome{color:#a0d;}
+.pay-badge.paylater{color:#00b14f;}
+/* Mastercard two-circle */
+.mc-left{width:14px;height:14px;border-radius:50%;background:#eb001b;margin-right:-5px;flex-shrink:0;}
+.mc-right{width:14px;height:14px;border-radius:50%;background:#f79e1b;flex-shrink:0;}
+
+/* ══════════════════════════════
+   FOOTER — BOTTOM STRIP
+══════════════════════════════ */
+.footer-bottom-strip{
+  background:#0a0a0a;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:40px;
+  padding:40px 60px;
+  border-top:1px solid #1e1e1e;
+  align-items:start;
+}
+.subscribe-label{
+  font-size:11px;font-weight:700;letter-spacing:2px;
+  text-transform:uppercase;color:#999;margin-bottom:14px;
+}
+.subscribe-form{
+  display:flex;gap:0;max-width:400px;
+}
+.subscribe-form input{
+  flex:1;background:#1a1a1a;border:1px solid #2a2a2a;
+  border-right:none;border-radius:4px 0 0 4px;
+  padding:12px 16px;font-size:13px;color:#fff;
+  outline:none;transition:border-color 0.2s;
+}
+.subscribe-form input::placeholder{color:#555;}
+.subscribe-form input:focus{border-color:var(--jbl-org);}
+.subscribe-form button{
+  background:var(--jbl-org);color:#fff;
+  border:none;padding:12px 22px;
+  font-size:11px;font-weight:800;letter-spacing:1.5px;
+  text-transform:uppercase;border-radius:0 4px 4px 0;
+  cursor:pointer;transition:background 0.2s;white-space:nowrap;
+}
+.subscribe-form button:hover{background:var(--jbl-org2);}
+.customer-care h4{
+  font-size:11px;font-weight:800;letter-spacing:2px;
+  text-transform:uppercase;color:#fff;margin-bottom:10px;
+}
+.customer-care p{
+  font-size:13px;color:#888;line-height:1.8;
+}
+
+/* ══════════════════════════════
+   FOOTER — SOCIAL ROW
+══════════════════════════════ */
+.footer-social{
+  background:#0a0a0a;
+  display:flex;align-items:center;justify-content:center;
+  gap:16px;padding:24px 60px;
+  border-top:1px solid #1a1a1a;
+}
+.social-icon{
+  width:40px;height:40px;border-radius:50%;
+  background:#1e1e1e;border:1px solid #2a2a2a;
+  display:flex;align-items:center;justify-content:center;
+  color:#999;text-decoration:none;
+  transition:background 0.2s,color 0.2s,border-color 0.2s;
+}
+.social-icon:hover{
+  background:var(--jbl-org);color:#fff;
+  border-color:var(--jbl-org);
+}
+.social-icon svg{width:16px;height:16px;}
+
+/* ══════════════════════════════
+   FOOTER — COPYRIGHT
+══════════════════════════════ */
+.footer-copyright{
+  background:#0a0a0a;
+  text-align:center;
+  padding:16px 60px 28px;
+  border-top:1px solid #141414;
+}
+.footer-copyright p{
+  font-size:11px;color:#444;line-height:1.8;
+}
+
+/* ══════════════════════════════
+   BACK TO TOP BUTTON
+══════════════════════════════ */
+.back-top{
+  position:fixed;bottom:24px;right:24px;
+  width:42px;height:42px;
+  background:var(--jbl-org);color:#fff;
+  border:none;cursor:pointer;
+  font-size:18px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+  border-radius:4px;
+  box-shadow:0 4px 14px rgba(255,85,0,0.4);
+  transition:all 0.2s;z-index:999;
+  opacity:0;pointer-events:none;
+}
+.back-top.visible{opacity:1;pointer-events:auto;}
+.back-top:hover{background:var(--jbl-org2);transform:translateY(-2px);}
+
+/* ════════════════════════════════════════════
+   RESPONSIVE
+════════════════════════════════════════════ */
+@media(max-width:1100px){
+  .hero-products{grid-template-columns:repeat(2,1fr);}
+  .promo-flash{grid-template-columns:1fr;}
+  .promo-bottom{grid-template-columns:1fr;}
+  .usecase-tabs{grid-template-columns:repeat(2,1fr);}
+  .usecase-panel.active{grid-template-columns:1fr;}
+  .lifestyle-banner{grid-template-columns:1fr;gap:32px;padding:40px;}
+  .lb-right{text-align:left;}
+  .lb-desc{margin-left:0;}
+  .sound-grid{grid-template-columns:1fr;}
+  .footer-main{grid-template-columns:repeat(2,1fr);gap:32px;}
+  .footer-bottom-strip{grid-template-columns:1fr;}
+}
+@media(max-width:768px){
+  .hero-title{font-size:80px;}
+  .hero-inner{padding:0 20px;}
+  .products-zone{padding:32px 20px;}
+  .promo-inner{padding:0 20px;}
+  .sound-inner{padding:0 20px;}
+  .usecase-panel{padding:28px 20px;}
+  .uc-panel-products{grid-template-columns:repeat(2,1fr);}
+  .hero-stats{flex-wrap:wrap;}
+  .voucher-card,.gift-card{flex-direction:column;gap:20px;}
+  .footer-main{grid-template-columns:1fr;padding:36px 24px;}
+  .footer-bottom-strip{padding:28px 24px;}
+  .footer-social{padding:20px 24px;}
+  .footer-copyright{padding:14px 24px 24px;}
+  .product-grid{grid-template-columns:repeat(2,1fr);}
+}
+@media(max-width:480px){
+  .hero-products{grid-template-columns:1fr;}
+  .product-grid{grid-template-columns:1fr;}
+  .uc-panel-products{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════
+     ORIGINAL TMT HEADER
+══════════════════════════════ -->
+<header class="header-top">
+  <a href="#" class="logo">
+    <img src="All_TMT_Logo_White.png" alt="TMT Thundermatch"
+         onerror="this.style.display='none';document.getElementById('lf').style.display='flex';"/>
+    <div id="lf" class="logo-text" style="display:none;">
+      <span class="tmt">TMT<sup style="font-size:14px;">®</sup></span>
+      <span class="brand-name">THUNDERMATCH</span>
+    </div>
+  </a>
+  <div class="header-icons">
+    <a href="#" aria-label="Search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></a>
+    <a href="#" aria-label="Account"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></a>
+    <a href="#" aria-label="Cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></a>
+  </div>
+</header>
+
+<nav class="header-nav">
+  <ul>
+    <li><a href="#">Sale</a></li>
+    <li><a href="#">PC &amp; Laptop</a></li>
+    <li><a href="#">Rig Builder</a></li>
+    <li><a href="#">Mobile</a></li>
+    <li><a href="#">Gaming</a></li>
+    <li><a href="#">Lifestyle</a></li>
+    <li><a href="#">Featured Brands</a></li>
+    <li><a href="#">Services</a></li>
+  </ul>
+</nav>
+
+<div class="breadcrumb">
+  <a href="#">Home</a> / <a href="#">Featured Brands</a> / <span>JBL</span>
+</div>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero">
+  <div class="hero-arc"></div>
+  <div class="hero-inner">
+    <div class="hero-top-row">
+      <div class="hero-badge">Official Brand Store</div>
+      <div class="hero-badge-right">Est. 1946 · New York</div>
+    </div>
+    <div class="hero-title-block">
+      <span class="hero-overline">Feel Every Beat</span>
+      <div class="hero-title">
+        HEAR<br/>
+        THE<br/>
+        <span class="white-out">DIFF</span>ERENCE
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="hstat"><div class="hstat-num">75+</div><div class="hstat-label">Years of Sound</div></div>
+      <div class="hstat"><div class="hstat-num">1B+</div><div class="hstat-label">Units Sold</div></div>
+      <div class="hstat"><div class="hstat-num">100+</div><div class="hstat-label">Countries</div></div>
+      <div class="hstat"><div class="hstat-num">Pro</div><div class="hstat-label">Audio Heritage</div></div>
+    </div>
+    <div class="hero-ctas">
+      <a href="#products" class="btn-white">Shop All Products</a>
+      <a href="#promo" class="btn-white-out">View Promotions</a>
+    </div>
+    <div class="hero-products">
+      <div class="hero-prod-card">
+        <svg class="hpc-geo" viewBox="0 0 200 200" fill="none">
+          <circle cx="100" cy="100" r="95" stroke="white" stroke-width="1"/>
+          <circle cx="100" cy="100" r="78" stroke="white" stroke-width="1"/>
+          <circle cx="100" cy="100" r="61" stroke="white" stroke-width="1"/>
+          <circle cx="100" cy="100" r="44" stroke="white" stroke-width="1"/>
+          <circle cx="100" cy="100" r="27" stroke="white" stroke-width="1"/>
+          <circle cx="100" cy="100" r="10" stroke="white" stroke-width="1"/>
+          <line x1="100" y1="5" x2="100" y2="195" stroke="white" stroke-width="0.5" stroke-dasharray="3 7" opacity="0.6"/>
+          <line x1="5" y1="100" x2="195" y2="100" stroke="white" stroke-width="0.5" stroke-dasharray="3 7" opacity="0.6"/>
+        </svg>
+        <div class="hpc-text">
+          <span class="hpc-kicker">Flip · Charge · Xtreme</span>
+          <div class="hpc-name">Portable<br/>Speakers</div>
+          <a href="#products" class="hpc-explore">Explore</a>
+        </div>
+      </div>
+      <div class="hero-prod-card">
+        <svg class="hpc-geo" viewBox="0 0 200 200" fill="none">
+          <path d="M0 80 Q25 40 50 80 Q75 120 100 80 Q125 40 150 80 Q175 120 200 80" stroke="white" stroke-width="1.2" fill="none"/>
+          <path d="M0 100 Q25 60 50 100 Q75 140 100 100 Q125 60 150 100 Q175 140 200 100" stroke="white" stroke-width="1.5" fill="none"/>
+          <path d="M0 120 Q25 80 50 120 Q75 160 100 120 Q125 80 150 120 Q175 160 200 120" stroke="white" stroke-width="1.2" fill="none"/>
+        </svg>
+        <div class="hpc-text">
+          <span class="hpc-kicker">Tune · Live · Tour</span>
+          <div class="hpc-name">Personal<br/>Audio</div>
+          <a href="#products" class="hpc-explore">Explore</a>
+        </div>
+      </div>
+      <div class="hero-prod-card">
+        <svg class="hpc-geo" viewBox="0 0 200 200" fill="none">
+          <circle cx="100" cy="100" r="14" stroke="white" stroke-width="1.5"/>
+          <circle cx="100" cy="100" r="50" stroke="white" stroke-width="0.75" stroke-dasharray="4 6"/>
+          <line x1="100" y1="86" x2="100" y2="15" stroke="white" stroke-width="1"/>
+          <line x1="100" y1="114" x2="100" y2="185" stroke="white" stroke-width="1"/>
+          <line x1="86" y1="100" x2="15" y2="100" stroke="white" stroke-width="1"/>
+          <line x1="114" y1="100" x2="185" y2="100" stroke="white" stroke-width="1"/>
+          <line x1="110" y1="90" x2="163" y2="37" stroke="white" stroke-width="1"/>
+          <line x1="90" y1="110" x2="37" y2="163" stroke="white" stroke-width="1"/>
+          <line x1="90" y1="90" x2="37" y2="37" stroke="white" stroke-width="1"/>
+          <line x1="110" y1="110" x2="163" y2="163" stroke="white" stroke-width="1"/>
+        </svg>
+        <div class="hpc-text">
+          <span class="hpc-kicker">Club · Stage · Encore</span>
+          <div class="hpc-name">Party<br/>Box</div>
+          <a href="#products" class="hpc-explore">Explore</a>
+        </div>
+      </div>
+      <div class="hero-prod-card">
+        <svg class="hpc-geo" viewBox="0 0 200 200" fill="none">
+          <rect x="5" y="5" width="190" height="190" stroke="white" stroke-width="1"/>
+          <rect x="22" y="22" width="156" height="156" stroke="white" stroke-width="1"/>
+          <rect x="39" y="39" width="122" height="122" stroke="white" stroke-width="1"/>
+          <rect x="56" y="56" width="88" height="88" stroke="white" stroke-width="1"/>
+          <rect x="73" y="73" width="54" height="54" stroke="white" stroke-width="1"/>
+          <line x1="5" y1="5" x2="195" y2="195" stroke="white" stroke-width="0.5" stroke-dasharray="3 7" opacity="0.5"/>
+          <line x1="195" y1="5" x2="5" y2="195" stroke="white" stroke-width="0.5" stroke-dasharray="3 7" opacity="0.5"/>
+        </svg>
+        <div class="hpc-text">
+          <span class="hpc-kicker">Soundbar · Rise · Horizon</span>
+          <div class="hpc-name">Home<br/>Audio</div>
+          <a href="#products" class="hpc-explore">Explore</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-wave"></div>
+</section>
+
+<!-- ═══════════ PROMOTION ═══════════ -->
+<section id="promo" class="promo-section">
+  <div class="promo-inner">
+    <div class="sec-eyebrow">Limited Time</div>
+    <div class="sec-heading">Current <em>Promotions</em></div>
+    <div class="promo-flash">
+      <div class="pf-left">
+        <div>
+          <div class="pf-tag"><span class="pf-blink"></span>Flash Sale — Active Now</div>
+          <div class="pf-title">JBL <em>Mid-Year</em><br/>Sound Sale</div>
+          <p class="pf-desc">The loudest sale of the year. Grab JBL's iconic portable speakers, noise-cancelling headphones, wireless earbuds and home audio systems at the biggest discounts we've ever offered.</p>
+        </div>
+        <div class="pf-bottom">
+          <div class="countdown">
+            <div class="cd-blk"><div class="cd-num" id="cd-h">07</div><div class="cd-lbl">HRS</div></div>
+            <div class="cd-sep">:</div>
+            <div class="cd-blk"><div class="cd-num" id="cd-m">52</div><div class="cd-lbl">MIN</div></div>
+            <div class="cd-sep">:</div>
+            <div class="cd-blk"><div class="cd-num" id="cd-s">33</div><div class="cd-lbl">SEC</div></div>
+          </div>
+          <a href="#products" class="btn-white" style="background:var(--jbl-org);color:#fff;box-shadow:0 4px 16px rgba(255,85,0,0.3);font-size:11px;padding:13px 28px;">Shop Sale Now</a>
+        </div>
+      </div>
+      <div class="pf-right">
+        <div class="pf-pct-wrap">
+          <div class="pf-pct">40<span style="font-size:44px;letter-spacing:0;">%</span></div>
+          <div class="pf-off">Off Selected Items</div>
+          <div class="pf-note">Ends 28 Feb 2026 · 11:59 PM</div>
+        </div>
+      </div>
+    </div>
+    <div class="promo-bottom">
+      <div class="voucher-card">
+        <div class="vc-icon">🎟️</div>
+        <div class="vc-content">
+          <div class="vc-lbl">Exclusive Voucher Code</div>
+          <div class="vc-code" onclick="navigator.clipboard?.writeText('JBLTMT20');this.textContent='JBLTMT20 ✓'">JBLTMT20</div>
+          <div class="vc-info"><strong>Extra RM20 OFF</strong> — Min. spend RM300<br/>Valid on all JBL products · One use per account</div>
+        </div>
+      </div>
+      <div class="gift-card">
+        <div class="gc-icon">🎁</div>
+        <div class="gc-content">
+          <div class="gc-type">Free Gift with Purchase</div>
+          <div class="gc-title">Free JBL Clip 5 Speaker<br/><span style="font-size:13px;font-weight:500;color:var(--gray4);">worth RM199 — while stocks last</span></div>
+          <p class="gc-desc">Spend RM600 or more on any JBL product and receive a FREE JBL Clip 5 Portable Speaker automatically added to your cart.</p>
+          <a href="#products" class="gc-link">Shop Now →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ USE CASE SELECTOR ═══════════ -->
+<div id="usecase" class="usecase-section">
+  <div class="usecase-tabs">
+    <div class="uc-tab active" onclick="switchTab(this,'indoor')">
+      <div class="uc-emoji">🏠</div>
+      <div class="uc-text"><div class="uc-name">Indoor</div><div class="uc-sub">Home &amp; Desk</div></div>
+    </div>
+    <div class="uc-tab" onclick="switchTab(this,'outdoor')">
+      <div class="uc-emoji">🏕️</div>
+      <div class="uc-text"><div class="uc-name">Outdoor</div><div class="uc-sub">On-the-Go</div></div>
+    </div>
+    <div class="uc-tab" onclick="switchTab(this,'studio')">
+      <div class="uc-emoji">🎙️</div>
+      <div class="uc-text"><div class="uc-name">Studio</div><div class="uc-sub">Work &amp; Focus</div></div>
+    </div>
+    <div class="uc-tab" onclick="switchTab(this,'party')">
+      <div class="uc-emoji">🎉</div>
+      <div class="uc-text"><div class="uc-name">Party</div><div class="uc-sub">Loud &amp; Social</div></div>
+    </div>
+  </div>
+  <div class="usecase-panel active" id="panel-indoor">
+    <div class="uc-panel-info">
+      <div class="uc-panel-tag">🏠 Indoor Use</div>
+      <div class="uc-panel-title">Perfect Sound at Home</div>
+      <p class="uc-panel-desc">Fill every room with rich, balanced audio. JBL's home audio range is designed for immersive listening.</p>
+      <div class="uc-panel-recs">
+        <div class="uc-rec">JBL Bar 1000 for cinematic TV audio</div>
+        <div class="uc-rec">JBL Tune 770NC for distraction-free work</div>
+        <div class="uc-rec">JBL Authentics 500 for room-filling music</div>
+      </div>
+    </div>
+    <div class="uc-panel-products">
+      <div class="uc-prod-card"><div class="uc-prod-img">🔊</div><div class="uc-prod-name">JBL Bar 1000 7.1.4ch Soundbar</div><div><span class="uc-prod-price">RM3,999</span><span class="uc-prod-was">RM4,599</span></div></div>
+      <div class="uc-prod-card"><div class="uc-prod-img">🎧</div><div class="uc-prod-name">JBL Tune 770NC Wireless</div><div><span class="uc-prod-price">RM249</span><span class="uc-prod-was">RM299</span></div></div>
+      <div class="uc-prod-card"><div class="uc-prod-img">📻</div><div class="uc-prod-name">JBL Authentics 500 Speaker</div><div><span class="uc-prod-price">RM1,799</span><span class="uc-prod-was">RM2,099</span></div></div>
+    </div>
+  </div>
+  <div class="usecase-panel" id="panel-outdoor">
+    <div class="uc-panel-info">
+      <div class="uc-panel-tag">🏕️ Outdoor Use</div>
+      <div class="uc-panel-title">Built for Adventure</div>
+      <p class="uc-panel-desc">IP67-rated waterproof and dustproof speakers that go wherever you do — beach, hiking, camping, or poolside.</p>
+      <div class="uc-panel-recs">
+        <div class="uc-rec">JBL Charge 5 for all-day battery</div>
+        <div class="uc-rec">JBL Flip 7 for portable adventures</div>
+        <div class="uc-rec">JBL Reflect Aero for active workouts</div>
+      </div>
+    </div>
+    <div class="uc-panel-products">
+      <div class="uc-prod-card"><div class="uc-prod-img">🏖️</div><div class="uc-prod-name">JBL Charge 5 Portable Speaker</div><div><span class="uc-prod-price">RM449</span><span class="uc-prod-was">RM549</span></div></div>
+      <div class="uc-prod-card"><div class="uc-prod-img">🎵</div><div class="uc-prod-name">JBL Flip 7 Portable Speaker</div><div><span class="uc-prod-price">RM399</span><span class="uc-prod-was">RM469</span></div></div>
+      <div class="uc-prod-card"><div class="uc-prod-img">🏃</div><div class="uc-prod-name">JBL Reflect Aero TWS Earbuds</div><div><span class="uc-prod-price">RM449</span><span class="uc-prod-was">RM529</span></div></div>
+    </div>
+  </div>
+  <div class="usecase-panel" id="panel-studio">
+    <div class="uc-panel-info">
+      <div class="uc-panel-tag">🎙️ Studio Use</div>
+      <div class="uc-panel-title">Focus &amp; Create</div>
+      <p class="uc-panel-desc">Noise cancellation and studio-quality audio tuning that lets you focus on what matters.</p>
+      <div class="uc-panel-recs">
+        <div class="uc-rec">JBL Tour One M2 for deep ANC</div>
+        <div class="uc-rec">JBL 305P MkII for studio monitoring</div>
+        <div class="uc-rec">JBL Vibe Beam for all-day wear</div>
+      </div>
+    </div>
+    <div class="uc-panel-products">
+      <div class="uc-prod-card"><div class="uc-prod-img">🎧</div><div class="uc-prod-name">JBL Tour One M2 ANC</div><div><span class="uc-prod-price">RM799</span><span class="uc-prod-was">RM999</span></div></div>
+      <div class="uc-prod-card"><div class="uc-prod-img">🎛️</div><div class="uc-prod-name">JBL 305P MkII Studio Monitor</div><div><span class="uc-prod-price">RM599</span><span class="uc-prod-was">RM699</span></div></div>
+      <div class="uc-prod-card"><div class="uc-prod-img">🎵</div><div class="uc-prod-name">JBL Vibe Beam TWS Earbuds</div><div><span class="uc-prod-price">RM149</span><span class="uc-prod-was">RM189</span></div></div>
+    </div>
+  </div>
+  <div class="usecase-panel" id="panel-party">
+    <div class="uc-panel-info">
+      <div class="uc-panel-tag">🎉 Party Use</div>
+      <div class="uc-panel-title">Turn It Up Loud</div>
+      <p class="uc-panel-desc">Party modes, light shows, and PartyBoost multi-speaker pairing that fills a room — or a stadium.</p>
+      <div class="uc-panel-recs">
+        <div class="uc-rec">JBL Xtreme 4 for massive outdoor sound</div>
+        <div class="uc-rec">JBL PartyBox 110 for indoor parties</div>
+        <div class="uc-rec">JBL Pulse 6 for light + sound shows</div>
+      </div>
+    </div>
+    <div class="uc-panel-products">
+      <div class="uc-prod-card"><div class="uc-prod-img">🔊</div><div class="uc-prod-name">JBL Xtreme 4 Portable Speaker</div><div><span class="uc-prod-price">RM849</span><span class="uc-prod-was">RM999</span></div></div>
+      <div class="uc-prod-card"><div class="uc-prod-img">🎊</div><div class="uc-prod-name">JBL PartyBox 110 Speaker</div><div><span class="uc-prod-price">RM1,299</span><span class="uc-prod-was">RM1,499</span></div></div>
+      <div class="uc-prod-card"><div class="uc-prod-img">💡</div><div class="uc-prod-name">JBL Pulse 6 LED Speaker</div><div><span class="uc-prod-price">RM699</span><span class="uc-prod-was">RM849</span></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PRODUCTS ═══════════ -->
+<div class="products-zone" id="products">
+  <!-- PORTABLE SPEAKERS -->
+  <div style="margin-bottom:60px;">
+    <div class="sec-head">
+      <div class="sec-head-left"><div class="sec-ol">JBL Collection</div><div class="sec-ttl">Portable Speakers</div><div class="sec-cnt">4 products available</div></div>
+      <a href="#" class="sec-lnk">View All →</a>
+    </div>
+    <div class="product-grid">
+      <div class="product-card">
+        <div class="card-badge">18% Off</div>
+        <div class="card-img"><div class="card-placeholder"><svg viewBox="0 0 48 48" fill="none"><rect x="10" y="14" width="28" height="20" rx="10" fill="currentColor" opacity="0.22" stroke="currentColor" stroke-width="1.5"/><circle cx="18" cy="24" r="4" fill="currentColor" opacity="0.35"/><circle cx="30" cy="24" r="4" fill="currentColor" opacity="0.35"/></svg><span>Product Image</span></div></div>
+        <div class="card-body"><div class="card-cat">Portable · IP67 · 20hr Battery</div><div class="card-name">JBL Charge 5 Portable Speaker</div><div class="card-div"></div><div class="card-colors"><div class="cdot active" style="background:#111;border-color:#555;"></div><div class="cdot" style="background:#cc0000;"></div><div class="cdot" style="background:#0057E7;"></div><div class="cdot" style="background:#2d8a3e;"></div></div><div class="card-promo">🏷️ Up to RM100.00 OFF</div><div class="card-price-row"><div class="card-price">RM449.00</div><div class="card-orig">RM549.00</div></div><div class="card-voucher">-RM100.00 voucher (80 available)</div></div>
+      </div>
+      <div class="product-card">
+        <div class="card-tag">Best Seller</div>
+        <div class="card-img"><div class="card-placeholder"><svg viewBox="0 0 48 48" fill="none"><rect x="12" y="16" width="24" height="16" rx="8" fill="currentColor" opacity="0.22" stroke="currentColor" stroke-width="1.5"/><circle cx="20" cy="24" r="3" fill="currentColor" opacity="0.3"/><circle cx="28" cy="24" r="3" fill="currentColor" opacity="0.3"/></svg><span>Product Image</span></div></div>
+        <div class="card-body"><div class="card-cat">Portable · IP67 · 12hr Battery</div><div class="card-name">JBL Flip 7 Portable Speaker</div><div class="card-div"></div><div class="card-colors"><div class="cdot active" style="background:#111;border-color:#555;"></div><div class="cdot" style="background:#cc0000;"></div><div class="cdot" style="background:#e0e0e0;"></div><div class="cdot" style="background:#FF5500;border-color:#FF5500;"></div></div><div class="card-promo">🏷️ Up to RM70.00 OFF</div><div class="card-price-row"><div class="card-price">RM399.00</div><div class="card-orig">RM469.00</div></div><div class="card-voucher">-RM70.00 voucher (120 available)</div></div>
+      </div>
+      <div class="product-card">
+        <div class="card-badge">15% Off</div>
+        <div class="card-img"><div class="card-placeholder"><svg viewBox="0 0 48 48" fill="none"><rect x="6" y="12" width="36" height="26" rx="13" fill="currentColor" opacity="0.2" stroke="currentColor" stroke-width="1.5"/><circle cx="16" cy="25" r="5" fill="currentColor" opacity="0.3"/><circle cx="32" cy="25" r="5" fill="currentColor" opacity="0.3"/></svg><span>Product Image</span></div></div>
+        <div class="card-body"><div class="card-cat">Portable · IP67 · 24hr · PartyBoost</div><div class="card-name">JBL Xtreme 4 Portable Speaker</div><div class="card-div"></div><div class="card-colors"><div class="cdot active" style="background:#111;border-color:#555;"></div><div class="cdot" style="background:#cc0000;"></div></div><div class="card-promo">🏷️ Up to RM150.00 OFF</div><div class="card-price-row"><div class="card-price">RM849.00</div><div class="card-orig">RM999.00</div></div><div class="card-voucher">-RM150.00 voucher (40 available)</div></div>
+      </div>
+      <div class="product-card">
+        <div class="card-badge">New</div>
+        <div class="card-img"><div class="card-placeholder"><svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="14" fill="currentColor" opacity="0.18" stroke="currentColor" stroke-width="1.5"/><circle cx="24" cy="24" r="8" fill="currentColor" opacity="0.25"/><circle cx="24" cy="24" r="3" fill="currentColor" opacity="0.4"/></svg><span>Product Image</span></div></div>
+        <div class="card-body"><div class="card-cat">360° · LED · IP67 · PartyBoost</div><div class="card-name">JBL Pulse 6 LED Speaker</div><div class="card-div"></div><div class="card-colors"><div class="cdot active" style="background:#111;border-color:#555;"></div><div class="cdot" style="background:#e0e0e0;"></div></div><div style="height:20px;"></div><div class="card-price-row"><div class="card-price">RM699.00</div></div><div class="card-voucher">Free Shipping Included</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LIFESTYLE BANNER -->
+  <div class="lifestyle-banner" style="margin-bottom:60px;">
+    <div class="lb-left">
+      <div class="lb-overline">JBL PartyBoost</div>
+      <div class="lb-title">PAIR.<br/><em>AMPLIFY.</em><br/>PARTY.</div>
+    </div>
+    <div class="lb-center"><span class="lb-center-icon">🔊</span></div>
+    <div class="lb-right">
+      <p class="lb-desc">Connect multiple JBL PartyBoost compatible speakers together for even bigger sound. Mix stereo or go full surround — the party never stops.</p>
+      <a href="#" class="btn-wh-sm">Explore PartyBoost</a>
+    </div>
+  </div>
+
+  <!-- HEADPHONES -->
+  <div style="margin-bottom:60px;">
+    <div class="sec-head">
+      <div class="sec-head-left"><div class="sec-ol">JBL Collection</div><div class="sec-ttl">Headphones</div><div class="sec-cnt">4 products available</div></div>
+      <a href="#" class="sec-lnk">View All →</a>
+    </div>
+    <div class="product-grid">
+      <div class="product-card">
+        <div class="card-badge">20% Off</div>
+        <div class="card-img"><div class="card-placeholder"><svg viewBox="0 0 48 48" fill="none"><path d="M8 28Q8 12 24 12Q40 12 40 28" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/><rect x="4" y="24" width="8" height="14" rx="4" fill="currentColor" opacity="0.3"/><rect x="36" y="24" width="8" height="14" rx="4" fill="currentColor" opacity="0.3"/></svg><span>Product Image</span></div></div>
+        <div class="card-body"><div class="card-cat">ANC · Wireless · 70hr Battery</div><div class="card-name">JBL Tour One M2 Wireless ANC</div><div class="card-div"></div><div class="card-colors"><div class="cdot active" style="background:#111;border-color:#555;"></div><div class="cdot" style="background:#e0e0e0;"></div><div class="cdot" style="background:#8B7355;"></div></div><div class="card-promo">🏷️ Up to RM200.00 OFF</div><div class="card-price-row"><div class="card-price">RM799.00</div><div class="card-orig">RM999.00</div></div><div class="card-voucher">-RM200.00 voucher (35 available)</div></div>
+      </div>
+      <div class="product-card">
+        <div class="card-tag">Popular</div>
+        <div class="card-img"><div class="card-placeholder"><svg viewBox="0 0 48 48" fill="none"><path d="M9 27Q9 12 24 12Q39 12 39 27" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/><rect x="5" y="23" width="8" height="14" rx="4" fill="currentColor" opacity="0.3"/><rect x="35" y="23" width="8" height="14" rx="4" fill="currentColor" opacity="0.3"/></svg><span>Product Image</span></div></div>
+        <div class="card-body"><div class="card-cat">ANC · Wireless · Foldable</div><div class="card-name">JBL Tune 770NC Wireless</div><div class="card-div"></div><div class="card-colors"><div class="cdot active" style="background:#111;border-color:#555;"></div><div class="cdot" style="background:#cc0000;"></div><div class="cdot" style="background:#0057E7;"></div><div class="cdot" style="background:#e0e0e0;"></div></div><div class="card-promo">🏷️ Up to RM50.00 OFF</div><div class="card-price-row"><div class="card-price">RM249.00</div><div class="card-orig">RM299.00</div></div><div class="card-voucher">-RM50.00 voucher (100 available)</div></div>
+      </div>
+      <div class="product-card">
+        <div class="card-badge">12% Off</div>
+        <div class="card-img"><div class="card-placeholder"><svg viewBox="0 0 48 48" fill="none"><path d="M10 26Q10 12 24 12Q38 12 38 26" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/><rect x="6" y="22" width="8" height="12" rx="4" fill="currentColor" opacity="0.3"/><rect x="34" y="22" width="8" height="12" rx="4" fill="currentColor" opacity="0.3"/></svg><span>Product Image</span></div></div>
+        <div class="card-body"><div class="card-cat">Wired · Over-Ear · Studio</div><div class="card-name">JBL Quantum 910 Wireless</div><div class="card-div"></div><div class="card-colors"><div class="cdot active" style="background:#111;border-color:#555;"></div></div><div class="card-promo">🏷️ Up to RM80.00 OFF</div><div class="card-price-row"><div class="card-price">RM589.00</div><div class="card-orig">RM669.00</div></div><div class="card-voucher">-RM80.00 voucher (50 available)</div></div>
+      </div>
+      <div class="product-card">
+        <div class="card-badge">New</div>
+        <div class="card-img"><div class="card-placeholder"><svg viewBox="0 0 48 48" fill="none"><path d="M11 27Q11 13 24 13Q37 13 37 27" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/><rect x="7" y="23" width="8" height="12" rx="4" fill="currentColor" opacity="0.3"/><rect x="33" y="23" width="8" height="12" rx="4" fill="currentColor" opacity="0.3"/></svg><span>Product Image</span></div></div>
+        <div class="card-body"><div class="card-cat">ANC · Wireless · Kids</div><div class="card-name">JBL JR 460NC Kids Headphone</div><div class="card-div"></div><div class="card-colors"><div class="cdot active" style="background:#0057E7;border-color:#0057E7;"></div><div class="cdot" style="background:#cc0000;"></div><div class="cdot" style="background:#e0e0e0;"></div></div><div style="height:20px;"></div><div class="card-price-row"><div class="card-price">RM199.00</div></div><div class="card-voucher">Free Shipping Included</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EARBUDS -->
+  <div style="margin-bottom:60px;">
+    <div class="sec-head">
+      <div class="sec-head-left"><div class="sec-ol">JBL Collection</div><div class="sec-ttl">True Wireless Earbuds</div><div class="sec-cnt">4 products available</div></div>
+      <a href="#" class="sec-lnk">View All →</a>
+    </div>
+    <div class="product-grid">
+      <div class="product-card">
+        <div class="card-badge">25% Off</div>
+        <div class="card-img"><div class="card-placeholder"><svg viewBox="0 0 48 48" fill="none"><ellipse cx="16" cy="24" rx="6" ry="8" fill="currentColor" opacity="0.25" stroke="currentColor" stroke-width="1.5"/><ellipse cx="32" cy="24" rx="6" ry="8" fill="currentColor" opacity="0.25" stroke="currentColor" stroke-width="1.5"/></svg><span>Product Image</span></div></div>
+        <div class="card-body"><div class="card-cat">TWS · ANC · IP54 · 10hr</div><div class="card-name">JBL Tour Pro 2 True Wireless</div><div class="card-div"></div><div class="card-colors"><div class="cdot active" style="background:#111;border-color:#555;"></div><div class="cdot" style="background:#c8a951;border-color:#c8a951;"></div></div><div class="card-promo">🏷️ Up to RM200.00 OFF</div><div class="card-price-row"><div class="card-price">RM599.00</div><div class="card-orig">RM799.00</div></div><div class="card-voucher">-RM200.00 voucher (30 available)</div></div>
+      </div>
+      <div class="product-card">
+        <div class="card-tag">Best Seller</div>
+        <div class="card-img"><div class="card-placeholder"><svg viewBox="0 0 48 48" fill="none"><ellipse cx="16" cy="26" rx="5" ry="7" fill="currentColor" opacity="0.25" stroke="currentColor" stroke-width="1.5"/><ellipse cx="32" cy="26" rx="5" ry="7" fill="currentColor" opacity="0.25" stroke="currentColor" stroke-width="1.5"/></svg><span>Product Image</span></div></div>
+        <div class="card-body"><div class="card-cat">TWS · ANC · Wireless · 8hr</div><div class="card-name">JBL Wave Beam TWS Earbuds</div><div class="card-div"></div><div class="card-colors"><div class="cdot active" style="background:#111;border-color:#555;"></div><div class="cdot" style="background:#cc0000;"></div><div class="cdot" style="background:#0057E7;"></div><div class="cdot" style="background:#e0e0e0;"></div></div><div class="card-promo">🏷️ Up to RM50.00 OFF</div><div class="card-price-row"><div class="card-price">RM149.00</div><div class="card-orig">RM199.00</div></div><div class="card-voucher">-RM50.00 voucher (150 available)</div></div>
+      </div>
+      <div class="product-card">
+        <div class="card-badge">15% Off</div>
+        <div class="card-img"><div class="card-placeholder"><svg viewBox="0 0 48 48" fill="none"><ellipse cx="16" cy="25" rx="5" ry="7" fill="currentColor" opacity="0.22" stroke="currentColor" stroke-width="1.5"/><ellipse cx="32" cy="25" rx="5" ry="7" fill="currentColor" opacity="0.22" stroke="currentColor" stroke-width="1.5"/></svg><span>Product Image</span></div></div>
+        <div class="card-body"><div class="card-cat">TWS · Sport · IP68 · ANC</div><div class="card-name">JBL Reflect Aero TWS Earbuds</div><div class="card-div"></div><div class="card-colors"><div class="cdot active" style="background:#111;border-color:#555;"></div><div class="cdot" style="background:#e0e0e0;"></div></div><div class="card-promo">🏷️ Up to RM80.00 OFF</div><div class="card-price-row"><div class="card-price">RM449.00</div><div class="card-orig">RM529.00</div></div><div class="card-voucher">-RM80.00 voucher (60 available)</div></div>
+      </div>
+      <div class="product-card">
+        <div class="card-badge">New</div>
+        <div class="card-img"><div class="card-placeholder"><svg viewBox="0 0 48 48" fill="none"><ellipse cx="17" cy="25" rx="5" ry="6" fill="currentColor" opacity="0.22" stroke="currentColor" stroke-width="1.5"/><ellipse cx="31" cy="25" rx="5" ry="6" fill="currentColor" opacity="0.22" stroke="currentColor" stroke-width="1.5"/></svg><span>Product Image</span></div></div>
+        <div class="card-body"><div class="card-cat">TWS · Open-Ear · 32hr</div><div class="card-name">JBL Soundgear Sense TWS</div><div class="card-div"></div><div class="card-colors"><div class="cdot active" style="background:#111;border-color:#555;"></div><div class="cdot" style="background:#e0e0e0;"></div></div><div style="height:20px;"></div><div class="card-price-row"><div class="card-price">RM499.00</div></div><div class="card-voucher">Free Shipping Included</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SOUNDBARS -->
+  <div style="margin-bottom:20px;">
+    <div class="sec-head">
+      <div class="sec-head-left"><div class="sec-ol">JBL Collection</div><div class="sec-ttl">Soundbars &amp; Home Audio</div><div class="sec-cnt">4 products available</div></div>
+      <a href="#" class="sec-lnk">View All →</a>
+    </div>
+    <div class="product-grid">
+      <div class="product-card">
+        <div class="card-badge">13% Off</div>
+        <div class="card-img"><div class="card-placeholder"><svg viewBox="0 0 48 48" fill="none"><rect x="4" y="18" width="40" height="12" rx="4" fill="currentColor" opacity="0.2" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="24" r="3" fill="currentColor" opacity="0.35"/><circle cx="24" cy="24" r="3" fill="currentColor" opacity="0.35"/><circle cx="36" cy="24" r="3" fill="currentColor" opacity="0.35"/></svg><span>Product Image</span></div></div>
+        <div class="card-body"><div class="card-cat">7.1.4ch · Dolby Atmos · Wireless Sub</div><div class="card-name">JBL Bar 1000 Soundbar</div><div class="card-div"></div><div class="card-colors"><div class="cdot active" style="background:#111;border-color:#555;"></div></div><div class="card-promo">🏷️ Up to RM600.00 OFF</div><div class="card-price-row"><div class="card-price">RM3,999.00</div><div class="card-orig">RM4,599.00</div></div><div class="card-voucher">-RM600.00 voucher (15 available)</div></div>
+      </div>
+      <div class="product-card">
+        <div class="card-tag">Popular</div>
+        <div class="card-img"><div class="card-placeholder"><svg viewBox="0 0 48 48" fill="none"><rect x="6" y="19" width="36" height="10" rx="3" fill="currentColor" opacity="0.2" stroke="currentColor" stroke-width="1.5"/><circle cx="14" cy="24" r="2.5" fill="currentColor" opacity="0.3"/><circle cx="24" cy="24" r="2.5" fill="currentColor" opacity="0.3"/><circle cx="34" cy="24" r="2.5" fill="currentColor" opacity="0.3"/></svg><span>Product Image</span></div></div>
+        <div class="card-body"><div class="card-cat">5.0ch · Dolby Atmos · MultiBeam</div><div class="card-name">JBL Bar 500 Pro Soundbar</div><div class="card-div"></div><div class="card-colors"><div class="cdot active" style="background:#111;border-color:#555;"></div></div><div class="card-promo">🏷️ Up to RM200.00 OFF</div><div class="card-price-row"><div class="card-price">RM1,499.00</div><div class="card-orig">RM1,699.00</div></div><div class="card-voucher">-RM200.00 voucher (25 available)</div></div>
+      </div>
+      <div class="product-card">
+        <div class="card-badge">12% Off</div>
+        <div class="card-img"><div class="card-placeholder"><svg viewBox="0 0 48 48" fill="none"><rect x="8" y="16" width="32" height="18" rx="10" fill="currentColor" opacity="0.2" stroke="currentColor" stroke-width="1.5"/><circle cx="20" cy="25" r="5" fill="currentColor" opacity="0.3"/><circle cx="32" cy="25" r="4" fill="currentColor" opacity="0.25"/></svg><span>Product Image</span></div></div>
+        <div class="card-body"><div class="card-cat">Wireless · Alexa · Google · AirPlay 2</div><div class="card-name">JBL Authentics 500 Speaker</div><div class="card-div"></div><div class="card-colors"><div class="cdot active" style="background:#111;border-color:#555;"></div><div class="cdot" style="background:#e0e0e0;"></div></div><div class="card-promo">🏷️ Up to RM300.00 OFF</div><div class="card-price-row"><div class="card-price">RM1,799.00</div><div class="card-orig">RM2,099.00</div></div><div class="card-voucher">-RM300.00 voucher (20 available)</div></div>
+      </div>
+      <div class="product-card">
+        <div class="card-badge">New</div>
+        <div class="card-img"><div class="card-placeholder"><svg viewBox="0 0 48 48" fill="none"><rect x="4" y="20" width="40" height="8" rx="3" fill="currentColor" opacity="0.18" stroke="currentColor" stroke-width="1.5"/><circle cx="10" cy="24" r="2" fill="currentColor" opacity="0.3"/><circle cx="24" cy="24" r="2" fill="currentColor" opacity="0.3"/><circle cx="38" cy="24" r="2" fill="currentColor" opacity="0.3"/></svg><span>Product Image</span></div></div>
+        <div class="card-body"><div class="card-cat">2.1ch · Dolby Digital · HDMI ARC</div><div class="card-name">JBL Bar 2.1 Deep Bass MkII</div><div class="card-div"></div><div class="card-colors"><div class="cdot active" style="background:#111;border-color:#555;"></div></div><div style="height:20px;"></div><div class="card-price-row"><div class="card-price">RM799.00</div></div><div class="card-voucher">Free Shipping Included</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ SOUND QUALITY SECTION ═══════════ -->
+<div class="sound-section">
+  <div class="sound-inner">
+    <div class="sec-eyebrow">The JBL Difference</div>
+    <div class="sec-heading">75 Years of <em>Pure Sound</em></div>
+    <div class="sound-grid">
+      <div class="sound-card"><div class="sc-icon">🎵</div><div class="sc-title">Pro Sound Heritage</div><div class="sc-desc">The same acoustic engineering behind legendary concert halls and recording studios — now in every JBL product you hold. Since 1946, JBL has been the sound of live music.</div></div>
+      <div class="sound-card"><div class="sc-icon">🔋</div><div class="sc-title">All-Day Battery Life</div><div class="sc-desc">JBL's Charge 5 delivers 20 hours of playtime. The Xtreme 4 gives you 24 hours. Because music should outlast your longest adventure, not the other way around.</div></div>
+      <div class="sound-card"><div class="sc-icon">💧</div><div class="sc-title">Built Waterproof</div><div class="sc-desc">IP67 and IP68 certified across the portable speaker lineup — fully dustproof and submersible. Take JBL to the beach, pool, shower, or wherever life takes you.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+     TMT FOOTER
+══════════════════════════════ -->
+<div class="footer-main">
+  <div class="footer-col">
+    <h4>About</h4>
+    <ul>
+      <li><a href="#">Contact Us</a></li>
+      <li><a href="#">Stores</a></li>
+      <li><a href="#">Blog</a></li>
+      <li><a href="#">Work with us</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <h4>Policies</h4>
+    <ul>
+      <li><a href="#">Privacy Notice</a></li>
+      <li><a href="#">Pre-Order Policy</a></li>
+      <li><a href="#">Online Policies</a><span class="arrow">∨</span></li>
+      <li><a href="#">Retail Policies</a><span class="arrow">∨</span></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <h4>Services</h4>
+    <ul>
+      <li><a href="#">TMT Rewards</a></li>
+      <li><a href="#">Multi Payment</a></li>
+      <li><a href="#">Protection Plan</a></li>
+      <li><a href="#">Product Guide</a></li>
+      <li><a href="#">Corporate</a></li>
+      <li><a href="#">E-Invoice Portal</a></li>
+      <li><a href="#">E-Invoice FAQ</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <div class="pay-label">We Accept</div>
+    <div class="pay-grid">
+      <div class="pay-badge visa">VISA</div>
+      <div class="pay-badge"><div class="mc-left"></div><div class="mc-right"></div></div>
+      <div class="pay-badge amex">AMEX</div>
+      <div class="pay-badge fpx">FPX</div>
+      <div class="pay-badge touchngo">Touch<br/>'n Go</div>
+      <div class="pay-badge grabpay">GrabPay</div>
+      <div class="pay-badge boost">Boost</div>
+      <div class="pay-badge mae">MAE</div>
+      <div class="pay-badge shopeepay">Shopee<br/>Pay</div>
+    </div>
+    <div class="pay-label">Installment &amp; BNPL</div>
+    <div class="pay-grid">
+      <div class="pay-badge amex">AMEX</div>
+      <div class="pay-badge cimb">CIMB</div>
+      <div class="pay-badge hlb">Hong<br/>Leong</div>
+      <div class="pay-badge hsbc">HSBC</div>
+      <div class="pay-badge maybank">Maybank</div>
+      <div class="pay-badge affin">Affin</div>
+      <div class="pay-badge atome">atome</div>
+      <div class="pay-badge paylater">PayLater<br/>by Grab</div>
+    </div>
+  </div>
+</div>
+
+<div class="footer-bottom-strip">
+  <div>
+    <div class="subscribe-label">Subscribe to our emails</div>
+    <div class="subscribe-form">
+      <input type="email" placeholder="Enter your email address"/>
+      <button type="button">Subscribe</button>
+    </div>
+  </div>
+  <div class="customer-care">
+    <h4>Customer Care</h4>
+    <p>General Hotline, WhatsApp: 03-2022 5322<br/>10am – 6pm, Mon – Fri<br/>(Excluding Public Holidays)</p>
+  </div>
+</div>
+
+<div class="footer-social">
+  <a href="#" class="social-icon" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+  <a href="#" class="social-icon" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+  <a href="#" class="social-icon" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/></svg></a>
+  <a href="#" class="social-icon" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.4a2.78 2.78 0 0 0 1.95-1.97A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#f2f2f2"/></svg></a>
+</div>
+
+<div class="footer-copyright">
+  <p>Copyright 2024 © Thunder Match Technology Sdn Bhd (541512-U) All rights reserved</p>
+  <p>CMS Website by LARVEE Web App | Web Design Malaysia by Web Temple</p>
+</div>
+
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+// Use case selector
+function switchTab(el, id) {
+  document.querySelectorAll('.uc-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.usecase-panel').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('panel-' + id).classList.add('active');
+}
+
+// Countdown timer
+(function() {
+  const end = new Date(Date.now() + 7 * 3600000 + 52 * 60000 + 33000);
+  function tick() {
+    const d = Math.max(0, end - Date.now());
+    const fmt = n => String(Math.floor(n)).padStart(2, '0');
+    const h = document.getElementById('cd-h'), m = document.getElementById('cd-m'), s = document.getElementById('cd-s');
+    if (h) h.textContent = fmt(d / 3600000);
+    if (m) m.textContent = fmt((d % 3600000) / 60000);
+    if (s) s.textContent = fmt((d % 60000) / 1000);
+  }
+  tick(); setInterval(tick, 1000);
+})();
+
+// Back to top visibility
+window.addEventListener('scroll', () => {
+  const btn = document.getElementById('backTop');
+  if (btn) btn.classList.toggle('visible', window.scrollY > 400);
+});
+</script>
+</body>
+</html>
